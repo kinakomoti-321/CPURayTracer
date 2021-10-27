@@ -1,0 +1,3 @@
+/home/kinakomoti/RayTracing/CPURayTracer/build/CMakeFiles/rebuild_cache.dir
+/home/kinakomoti/RayTracing/CPURayTracer/build/CMakeFiles/edit_cache.dir
+/home/kinakomoti/RayTracing/CPURayTracer/build/CMakeFiles/main.dir
