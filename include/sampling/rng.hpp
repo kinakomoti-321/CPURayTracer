@@ -2,7 +2,7 @@
 #include <iostream>
 #include <limits>
 
-#include "include/sampling/sampler.hpp"
+#include "sampling/sampler.hpp"
 // *Really* minimal PCG32 code / (c) 2014 M.E. O'Neill / pcg-random.org
 // Licensed under Apache License 2.0 (NO WARRANTY, etc. see website)
 
@@ -35,6 +35,10 @@ class RNGrandom : public Sampler {
     seed.inc = 1;
   }
 
+  void reset(uint64_t inseed){
+    seed.state = inseed;
+    seed.inc = 1;
+  }
   float sample() {
     const float divider = 1.0f / std::numeric_limits<uint32_t>::max();
     return pcg32_random_r(&seed) * divider;

@@ -2,13 +2,13 @@
 #include <algorithm>
 #include <cmath>
 
-#include "include/core/constant.hpp"
-#include "include/math/vec3.hpp"
-#include "include/sampling/sampler.hpp"
+#include "core/constant.hpp"
+#include "math/vec3.hpp"
+#include "sampling/sampler.hpp"
 class BSDF {
  public:
   virtual Vec3 samplingBSDF(const Vec3& wo, Vec3& wi, float& pdf,
-                            Sampler& sampler) const = 0;
+                            std::shared_ptr<Sampler>& sampler) const = 0;
 };
 
 inline Vec3 cosineSampling(float u, float v, float& pdf) {

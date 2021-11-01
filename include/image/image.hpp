@@ -31,6 +31,22 @@ public:
 		}
 	}
 
+	Image(unsigned int width, unsigned int height,const Vec3& color) : width(width), height(height)
+	{
+		pixel = new float[width * height * 3];
+
+		for (int j = 0; j < height; ++j)
+		{
+			for (int i = 0; i < width; ++i)
+			{
+				const int idx = i * 3 + 3 * width * j;
+				pixel[idx] = color[0];
+				pixel[idx + 1] = color[1];
+				pixel[idx + 2] = color[2];
+			}
+		}
+	}
+
 	~Image()
 	{
 		delete[] pixel;
@@ -44,6 +60,19 @@ public:
 		pixel[idx + 2] = RGB[2];
 	}
 
+	Vec3 getPixel(unsigned int i,unsigned int j)const {
+		const int idx = i * 3 + 3 * width * j;
+		return Vec3(pixel[idx],pixel[idx+1],pixel[idx + 2]);
+	}
+
+	unsigned int getWidth() const{
+		return width;
+	}
+
+	unsigned int getHeight() const{
+		return height;
+	}
+	
 	void writePNG(std::string filename)
 	{
 		std::ofstream file(filename + ".ppm");

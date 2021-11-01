@@ -1,11 +1,11 @@
 #pragma once
 #include <memory>
 
-#include "include/BSDF/bsdf.hpp"
-#include "include/core/ray.hpp"
-#include "include/intersection/intersectinfo.h"
-#include "include/light/light.hpp"
-#include "include/shape/shape.hpp"
+#include "BSDF/bsdf.hpp"
+#include "core/ray.hpp"
+#include "intersection/intersectinfo.h"
+#include "light/light.hpp"
+#include "shape/shape.hpp"
 
 class Object {
  private:
@@ -22,7 +22,7 @@ class Object {
       : shape(shape), light(light), bsdf(bsdf){};
 
   bool hasLight() const { return light != nullptr; }
-  Vec3 evaluateBSDF(const Vec3& wo, Vec3& wi, float& pdf, Sampler& sampler) {
+  Vec3 evaluateBSDF(const Vec3& wo, Vec3& wi, float& pdf, std::shared_ptr<Sampler>& sampler) {
     return bsdf->samplingBSDF(wo, wi, pdf, sampler);
   }
   Vec3 Le() const { return light->Le(); }

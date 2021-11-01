@@ -1,10 +1,10 @@
 #pragma once
-#include "include/core/object.hpp"
-#include "include/integrator/integrator.hpp"
-#include "include/intersection/intersectinfo.h"
+#include "core/object.hpp"
+#include "integrator/integrator.hpp"
+#include "intersection/intersectinfo.h"
 class Pathtracer : public Integrator {
  public:
-  Vec3 integrate(const Ray& ray, const Scene& scene, Sampler& sample) {
+  Vec3 integrate(const Ray& ray, const Scene& scene, std::shared_ptr<Sampler>& sample) {
     const int MaxDepth = 100;
     const float p = 0.99;
     Vec3 throughput(1.0);
@@ -12,12 +12,12 @@ class Pathtracer : public Integrator {
     Ray next_ray = ray;
     for (int i = 0; i < MaxDepth; i++) {
       // Russian roulette
-      if (sample.sample() > p) break;
+      if (sample->sample() > p) break;
       throughput /= p;
 
       IntersectInfo info;
       if (scene.intersect(next_ray, info)) {
-        LTE = throughput * scene.sky();
+        LTE = throughput * scene.skyLe(ray);
         break;
       }
 

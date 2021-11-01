@@ -2,8 +2,8 @@
 #include <iostream>
 #include <limits>
 
-#include "include/core/ray.hpp"
-#include "include/math/vec3.hpp"
+#include "core/ray.hpp"
+#include "math/vec3.hpp"
 struct AABB {
   // bounds[0] => min edge, bounds[1] => max edge
   Vec3 bounds[2];
@@ -11,13 +11,13 @@ struct AABB {
   explicit AABB() {
     bounds[0] = Vec3(std::numeric_limits<float>::max());
     bounds[1] = Vec3(-std::numeric_limits<float>::max());
-  };
+  }
   explicit AABB(const Vec3& pMin, const Vec3& pMax) {
     bounds[0] = pMin;
     bounds[1] = pMax;
-  };
+  }
 
-  Vec3 center() const { return 0.5f * (bounds[0] + bounds[1]); };
+  Vec3 center() const { return 0.5f * (bounds[0] + bounds[1]); }
 
   int longestAxis() const {
     const Vec3 length = bounds[1] - bounds[0];
@@ -29,11 +29,11 @@ struct AABB {
     } else {
       return 2;
     }
-  };
+  }
 
   float surfaceArea() const {
-
-  };
+    return 1;
+  }
 
   bool intersect(const Ray& ray, const Vec3& dirInv,
                  const int dirInvSign[3]) const {

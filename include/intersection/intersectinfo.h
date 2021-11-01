@@ -3,9 +3,9 @@
 
 #include <utility>
 
-#include "include/core/object.hpp"
-#include "include/math/vec3.hpp"
-class Object {};
+#include "core/object.hpp"
+#include "math/vec3.hpp"
+class Object;
 struct IntersectInfo {
   float distance = 10000;
   Vec3 position;

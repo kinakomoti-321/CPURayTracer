@@ -72,10 +72,7 @@ inline float norm2(const Vec3 &v) {
   return sum;
 }
 
-inline Vec3 normalize(const Vec3 &v) {
-  Vec3 ref = v;
-  return ref / norm(v);
-}
+
 
 inline Vec3 operator+(const Vec3 &v1, const Vec3 &v2) {
   Vec3 ret;
@@ -159,6 +156,11 @@ inline Vec3 cross(const Vec3 &v1, const Vec3 &v2) {
   ret[2] = v1[0] * v2[1] - v1[1] * v2[0];
 
   return ret;
+}
+
+inline Vec3 normalize(const Vec3 &v) {
+  Vec3 ref = v;
+  return ref / norm(v);
 }
 
 inline std::ostream &operator<<(std::ostream &stream, const Vec3 &v) {

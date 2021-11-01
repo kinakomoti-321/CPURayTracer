@@ -1,5 +1,5 @@
 #pragma once
-#include "include/math/vec3.hpp"
+#include "math/vec3.hpp"
 class Light {
  private:
   Vec3 color;

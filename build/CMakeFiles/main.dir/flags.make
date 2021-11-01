@@ -6,5 +6,5 @@ CXX_FLAGS =   -std=gnu++17
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/kinakomoti/RayTracing/CPURayTracer/include 
+CXX_INCLUDES = -I/home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/include 
 

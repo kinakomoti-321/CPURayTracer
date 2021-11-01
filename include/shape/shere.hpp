@@ -1,19 +1,21 @@
 #pragma once
-#include <algorithm>>
+#include <algorithm>
 #include <cmath>
 #include <utility>
 
-#include "include/core/constant.hpp"
-#include "include/core/ray.hpp"
-#include "include/intersection/intersectinfo.h"
-#include "include/math/vec3.hpp"
-#include "include/shape/shape.hpp"
+#include "core/constant.hpp"
+#include "core/ray.hpp"
+#include "intersection/intersectinfo.h"
+#include "math/vec3.hpp"
+#include "shape/shape.hpp"
 class Sphere : public Shape {
  private:
   const Vec3 center;
   const float radius;
 
  public:
+  Sphere():center(Vec3(0.0)),radius(10000.0f){}
+
   Sphere(const Vec3& center, float raduis) : center(center), radius(raduis){};
 
   bool intersect(const Ray& ray, IntersectInfo& info) {

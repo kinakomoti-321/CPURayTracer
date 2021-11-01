@@ -1,11 +1,11 @@
 #pragma once
-#include "include/core/aabb.hpp"
-#include "include/core/ray.hpp"
-#include "include/image/texture.hpp"
-#include "include/intersection/intersectinfo.h"
+#include "core/aabb.hpp"
+#include "core/ray.hpp"
+#include "image/texture.hpp"
+#include "intersection/intersectinfo.h"
 class Shape {
  public:
-  virtual bool intersect(const Ray& ray, IntersectInfo& info){};
+  virtual bool intersect(const Ray& ray, IntersectInfo& info)const = 0;
   // return AABB covering the Object
   virtual AABB aabb() const = 0;
   // return the area of surface

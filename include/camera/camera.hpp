@@ -3,14 +3,12 @@
 
 #include "math/vec3.hpp"
 #include "core/ray.hpp"
+#include "sampling/sampler.hpp"
+#include "math/vec2.hpp"
+#include <memory>
 class Camera
 {
-protected:
-	Vec3 origin;
-	Vec3 atlook;
-
 public:
-	Camera(const Vec3 &origin, const Vec3 &atlook) : origin(origin), atlook(atlook) {}
-	virtual Ray getRay(float u, float v) {}
+	virtual Ray getRay(const Vec2& uv,std::shared_ptr<Sampler>& sampler,float& weight)const = 0;
 };
 #endif
