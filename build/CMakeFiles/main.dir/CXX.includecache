@@ -156,6 +156,16 @@ core/scene.hpp
 sampling/sampler.hpp
 ../include/integrator/sampling/sampler.hpp
 
+../include/integrator/nee.hpp
+core/object.hpp
+../include/integrator/core/object.hpp
+integrator/integrator.hpp
+../include/integrator/integrator/integrator.hpp
+intersection/intersectinfo.h
+../include/integrator/intersection/intersectinfo.h
+iostream
+-
+
 ../include/integrator/normalchecker.hpp
 ./integrator.hpp
 ../include/integrator/integrator.hpp
@@ -231,6 +241,8 @@ image/texture.hpp
 ../include/shape/image/texture.hpp
 intersection/intersectinfo.h
 ../include/shape/intersection/intersectinfo.h
+memory
+-
 
 ../include/shape/shere.hpp
 algorithm
@@ -256,11 +268,13 @@ core/constant.hpp
 core/aabb.hpp
 ../include/shape/core/aabb.hpp
 
-/home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/main.cpp
+/home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/NEE.cpp
 iostream
 -
 math/vec3.hpp
 /home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/math/vec3.hpp
+integrator/nee.hpp
+/home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/integrator/nee.hpp
 camera/pinhole.hpp
 /home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/camera/pinhole.hpp
 image/image.hpp
