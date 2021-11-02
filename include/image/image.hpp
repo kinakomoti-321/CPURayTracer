@@ -52,7 +52,7 @@ public:
 		delete[] pixel;
 	}
 
-	void setPixel(unsigned int i, unsigned int j, Vec3 &RGB)
+	void setPixel(const unsigned int i,const unsigned int j,const Vec3 &RGB)
 	{
 		const int idx = i * 3 + 3 * width * j;
 		pixel[idx] = RGB[0];
@@ -85,6 +85,7 @@ public:
 		file << "P3" << std::endl;
 		file << width << " " << height << std::endl;
 		file << "255" << std::endl;
+		this->gammaCorrection();
 		for (int j = 0; j < height; ++j)
 		{
 			for (int i = 0; i < width; ++i)

@@ -20,8 +20,8 @@ public:
 		ly = normalize(cross(lx,atlook));
 	}
 
-	Ray getRay(const Vec2& uv,std::shared_ptr<Sampler>& sampler,float& weight){
-		Vec3 sensor_pos = origin + uv[0] * sensorW[0] * lx + uv[1] * sensorW[1] * ly;
+	Ray getRay(const Vec2& uv,const std::shared_ptr<Sampler>& sampler,float& weight)const override{
+		Vec3 sensor_pos = origin + uv[0] * lx + uv[1] * ly;
 		Vec3 direction = normalize(origin + f * atlook -  sensor_pos);
 		weight = 1.0f;
 		return Ray(sensor_pos,direction);

@@ -23,6 +23,8 @@ BSDF/bsdf.hpp
 ../include/BSDF/BSDF/bsdf.hpp
 core/constant.hpp
 ../include/BSDF/core/constant.hpp
+iostream
+-
 
 ../include/camera/camera.hpp
 math/vec3.hpp
@@ -61,6 +63,8 @@ math/vec3.hpp
 ../include/core/object.hpp
 memory
 -
+iostream
+-
 BSDF/bsdf.hpp
 ../include/core/BSDF/bsdf.hpp
 core/ray.hpp
@@ -81,6 +85,8 @@ iostream
 -
 memory
 -
+omp.h
+-
 camera/camera.hpp
 ../include/core/camera/camera.hpp
 core/object.hpp
@@ -96,6 +102,8 @@ math/vec2.hpp
 image/image.hpp
 ../include/core/image/image.hpp
 string
+-
+chrono
 -
 
 ../include/core/scene.hpp
@@ -167,6 +175,8 @@ integrator/integrator.hpp
 ../include/integrator/integrator/integrator.hpp
 intersection/intersectinfo.h
 ../include/integrator/intersection/intersectinfo.h
+iostream
+-
 
 ../include/intersection/intersectinfo.h
 utility
@@ -175,6 +185,8 @@ core/object.hpp
 ../include/intersection/core/object.hpp
 math/vec3.hpp
 ../include/intersection/math/vec3.hpp
+math/vec2.hpp
+../include/intersection/math/vec2.hpp
 
 ../include/light/light.hpp
 math/vec3.hpp
@@ -235,6 +247,8 @@ intersection/intersectinfo.h
 ../include/shape/intersection/intersectinfo.h
 math/vec3.hpp
 ../include/shape/math/vec3.hpp
+math/vec2.hpp
+../include/shape/math/vec2.hpp
 shape/shape.hpp
 ../include/shape/shape/shape.hpp
 core/constant.hpp

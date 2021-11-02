@@ -35,11 +35,11 @@ class RNGrandom : public Sampler {
     seed.inc = 1;
   }
 
-  void reset(uint64_t inseed){
+  void reset(uint64_t inseed)override{
     seed.state = inseed;
     seed.inc = 1;
   }
-  float sample() {
+  float sample() override {
     const float divider = 1.0f / std::numeric_limits<uint32_t>::max();
     return pcg32_random_r(&seed) * divider;
   }

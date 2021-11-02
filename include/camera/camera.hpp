@@ -9,6 +9,6 @@
 class Camera
 {
 public:
-	virtual Ray getRay(const Vec2& uv,std::shared_ptr<Sampler>& sampler,float& weight)const = 0;
+	virtual Ray getRay(const Vec2& uv,const std::shared_ptr<Sampler>& sampler,float& weight) const = 0;
 };
 #endif

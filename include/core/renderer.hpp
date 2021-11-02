@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <memory>
+#include <omp.h>
 
 #include "camera/camera.hpp"
 #include "core/object.hpp"
@@ -10,6 +11,7 @@
 #include "math/vec2.hpp"
 #include "image/image.hpp"
 #include <string>
+#include <chrono>
 class Renderer {
  private:
   unsigned int width, height;
@@ -39,25 +41,35 @@ class Renderer {
   }
 
   void render(const Scene& scene,int sampling,const std::string& filename,std::shared_ptr<Sampler> sampler) {
+    std::cout << "Render Start" << std::endl;
+    auto start = std::chrono::system_clock::now();
+    
+    #pragma omp parallel for schedule(dynamic,1)
     for(int i = 0; i < width; i++){
       for(int j = 0; j < height; j++){
         Vec3 sumRadiance(0.0);
         sampler->reset(i + width * j);
-
+        // std::cout << i << " : " << j << ": samplingStart" << std::endl;
         for(int k = 0; k < sampling; k++){
           Vec2 cameraUV;
-          cameraUV[0] = (2.0f * (i+sampler->sample() - 0.5f) -width) / width;
-          cameraUV[1] = (2.0f * (j * sampler->sample() - 0.5f) - height)/width;
+          cameraUV[0] = (2.0f * (i+sampler->sample() - 0.5f) -width) / height;
+          cameraUV[1] = (2.0f * (j + sampler->sample() - 0.5f) - height)/ height;
           float cweight;
           Ray cameraray = camera->getRay(cameraUV,sampler,cweight);
+          // std::cout << "Integrate Start" << std::endl;
           sumRadiance += cweight * integrator->integrate(cameraray,scene,sampler); 
         } 
-
+      
+        // std::cout << i << " : " << j << ": sampling End" << std::endl;
         Vec3 radiance = sumRadiance / static_cast<float>(sampling);
         img->setPixel(i,j,radiance);    
       }
     }
-
+  auto end = std::chrono::system_clock::now();
+  std::cout << "End :"
+            << std::chrono::duration_cast<std::chrono::milliseconds>(end -
+                                                                     start).count()
+            << "ms" << std::endl;
     img->writePNG(filename);
   }
 };

@@ -5,12 +5,14 @@
 
 #include "core/object.hpp"
 #include "math/vec3.hpp"
+#include "math/vec2.hpp"
+
 class Object;
 struct IntersectInfo {
   float distance = 10000;
   Vec3 position;
   Vec3 normal;
-  std::pair<float, float> uv = {0, 0};
+  Vec2 uv; 
   Object* object;
 };
 #endif

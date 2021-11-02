@@ -7,7 +7,7 @@ class Sky{
 
 
     public:
-    Sky(std::shared_ptr<Texture> tex): tex(tex){}
+    Sky(const std::shared_ptr<Texture>& tex): tex(tex){}
     Sky(const Vec3& color){
         tex = std::make_shared<Texture>(color);
     }

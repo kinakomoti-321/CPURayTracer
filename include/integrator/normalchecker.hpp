@@ -9,7 +9,7 @@
 class NormalChecker: public Integrator{
     public:
     Vec3 integrate(const Ray& ray, const Scene& scene,
-                         std::shared_ptr<Sampler>& sampler){
+                         std::shared_ptr<Sampler>& sampler)const override{
 
                             IntersectInfo info;
                             if(scene.intersect(ray,info)){

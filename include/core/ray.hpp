@@ -5,8 +5,8 @@
 struct Ray {
   Vec3 origin;
   Vec3 direction;
-  float Min;
-  float Max;
+  float Min = 0.001;
+  float Max = 100000;
 
   Ray(const Vec3 &origin, const Vec3 &direction)
       : origin(origin), direction(direction) {}
