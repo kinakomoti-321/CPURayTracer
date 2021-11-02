@@ -237,6 +237,10 @@ math/vec3.hpp
 ../include/shape/math/vec3.hpp
 shape/shape.hpp
 ../include/shape/shape/shape.hpp
+core/constant.hpp
+../include/shape/core/constant.hpp
+core/aabb.hpp
+../include/shape/core/aabb.hpp
 
 /home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/main.cpp
 iostream
