@@ -62,12 +62,12 @@ Vec2 uv;
     return uv;
   }
   
-  Vec3 areaSampling(Sampler& sampler,IntersectInfo& info)const override{
-    float u = sampler.sample(),v = sampler.sample();
+  Vec3 areaSampling(const std::shared_ptr<Sampler>& sampler,IntersectInfo& info)const override{
+    float u = sampler->sample(),v = sampler->sample();
     float z = - 2.0f * u + 1.0f;
-    float y = std::sqrt(std::max(1.0f - z * z,0.0f)) * std::sin(2.0f * v);
-    float x = std::sqrt(std::max(1.0f - z * z,0.0f)) * std::cos(2.0f * v);
-
+    float y = std::sqrt(std::max(1.0f - z * z,0.0f)) * std::sin(2.0f * PI * v);
+    float x = std::sqrt(std::max(1.0f - z * z,0.0f)) * std::cos(2.0f * PI* v);
+    //  std::cout << Vec3(x,y,z)  << std::endl;
     Vec3 pos = center + radius * Vec3(x,y,z);
     info.position = pos;
     info.normal = normalize(Vec3(x,y,z));

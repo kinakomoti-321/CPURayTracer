@@ -8,7 +8,9 @@ class Texture{
     std::shared_ptr<Image> image;
 
     public:
-    Texture(const std::string& filename){}
+    Texture(const std::string& filepath){
+
+    }
     Texture(const Vec3& color){
         image = std::make_shared<Image>(1,1,color);
     }

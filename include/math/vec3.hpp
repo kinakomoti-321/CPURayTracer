@@ -163,6 +163,35 @@ inline Vec3 normalize(const Vec3 &v) {
   return ref / norm(v);
 }
 
+inline Vec3 localToWorld(const Vec3 &v, const Vec3 &lx, const Vec3 &ly,
+                   const Vec3 &lz)
+{
+    return Vec3(v[0] * lx[0] + v[1] * ly[0] + v[2] * lz[0],
+                 v[0] * lx[1] + v[1] * ly[1] + v[2] * lz[1],
+                 v[0] * lx[2] + v[1] * ly[2] + v[2] * lz[2]);
+}
+
+inline Vec3 worldtoLocal(const Vec3 &v, const Vec3 &lx, const Vec3 &ly, const Vec3 &lz)
+{
+    return Vec3(v[0] * lx[0] + v[1] * lx[1] + v[2] * lx[2],
+                 v[0] * ly[0] + v[1] * ly[1] + v[2] * ly[2],
+                 v[0] * lz[0] + v[1] * lz[1] + v[2] * lz[2]);
+}
+inline void tangentSpaceBasis(const Vec3 &n, Vec3 &t, Vec3 &b)
+{
+    if (abs(n[1]) < 0.9f)
+    {
+        t = cross(n, Vec3(0, 1, 0));
+    }
+    else
+    {
+        t = cross(n, Vec3(0, 0, -1));
+    }
+    t = normalize(t);
+    b = cross(t, n);
+    b = normalize(b);
+}
+
 inline std::ostream &operator<<(std::ostream &stream, const Vec3 &v) {
   stream << "(" << v[0] << ", " << v[1] << ", " << v[2] << ")";
   return stream;

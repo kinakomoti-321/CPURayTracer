@@ -7,5 +7,7 @@ class Light {
 
  public:
   Light(const Vec3& color, float LE) : color(color), LE(LE) {}
-  Vec3 Le() const { return color * LE; }
+  Vec3 Le() const { 
+    
+    return color * LE; }
 };

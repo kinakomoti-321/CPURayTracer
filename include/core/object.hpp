@@ -22,6 +22,9 @@ class Object {
   Vec3 sampleBSDF(const Vec3& wo, Vec3& wi, float& pdf,const std::shared_ptr<Sampler>& sampler) {
     return bsdf->samplingBSDF(wo, wi, pdf, sampler);
   }
+  Vec3 evaluateBSDF(const Vec3& wo,Vec3& wi){
+    return bsdf->evaluateBSDF(wo,wi);
+  }
   Vec3 Le() const {
      return light->Le(); }
 
@@ -33,7 +36,7 @@ class Object {
     return check;
   }
 
-  Vec3 areaSampling(Sampler& sampler,IntersectInfo& info){
+  Vec3 areaSampling(const std::shared_ptr<Sampler>& sampler,IntersectInfo& info){
     info.object = this;
     return shape->areaSampling(sampler,info);
   }

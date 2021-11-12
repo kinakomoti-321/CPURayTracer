@@ -60,6 +60,14 @@ public:
 		pixel[idx + 2] = RGB[2];
 	}
 
+	void addPixel(const unsigned int i,const unsigned int j,const Vec3 &RGB)
+	{
+		const int idx = i * 3 + 3 * width * j;
+		pixel[idx] += RGB[0];
+		pixel[idx + 1] += RGB[1];
+		pixel[idx + 2] += RGB[2];
+	}
+
 	Vec3 getPixel(unsigned int i,unsigned int j)const {
 		const int idx = i * 3 + 3 * width * j;
 		return Vec3(pixel[idx],pixel[idx+1],pixel[idx + 2]);
@@ -121,6 +129,18 @@ public:
 				pixel[idx + 1] = std::pow(pixel[idx + 1], 1 / 2.2f); // G
 				pixel[idx + 2] = std::pow(pixel[idx + 2], 1 / 2.2f); // B
 			}
+		}
+	}
+	void averageColor(unsigned int Sampling)
+	{
+		for (int j = 0; j < height; ++j)
+		{
+			for (int i = 0; i < width; ++i)
+			{
+				const int idx = 3 * i + 3 * width * j;
+				pixel[idx] /= static_cast<float>(Sampling);    
+				pixel[idx + 1] /= static_cast<float>(Sampling); 
+				pixel[idx + 2] /= static_cast<float>(Sampling); 			}
 		}
 	}
 };

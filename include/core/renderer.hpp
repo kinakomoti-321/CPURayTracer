@@ -72,4 +72,33 @@ class Renderer {
             << "ms" << std::endl;
     img->writePNG(filename);
   }
+
+  void timeRender(const Scene& scene,float time,const std::string& filename,std::shared_ptr<Sampler> sampler){
+    std::cout << "Render Start" << std::endl;
+    auto start = std::chrono::system_clock::now();
+    auto now = std::chrono::system_clock::now();
+    int counter = 0;
+
+    while(std::chrono::duration_cast<std::chrono::milliseconds>(now - start).count() < time){
+      ++counter;
+    #pragma omp parallel for schedule(dynamic,1)
+      for(int j = 0; j < height; j++){
+        for(int i = 0; i < width; i++){
+          sampler->reset(i + width * j + width * height *counter);
+          Vec2 cameraUV;
+          cameraUV[0] = (2.0f * (i+sampler->sample() - 0.5f) -width) / height;
+          cameraUV[1] = (2.0f * (j + sampler->sample() - 0.5f) - height)/ height;
+          float cweight;
+          Ray cameraray = camera->getRay(cameraUV,sampler,cweight);
+          Vec3 radiance = cweight * integrator->integrate(cameraray,scene,sampler); 
+          img->addPixel(i,j,radiance); 
+        }
+      }
+     now = std::chrono::system_clock::now();
+    }
+
+    std::cout << "Render End : " << counter << " sample" << std::endl;
+    img->averageColor(counter);
+    img->writePNG(filename);
+  }
 };

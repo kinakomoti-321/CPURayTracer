@@ -7,10 +7,14 @@ CMakeFiles/main.dir/src/NEE.cpp.o: ../include/camera/camera.hpp
 CMakeFiles/main.dir/src/NEE.cpp.o: ../include/camera/pinhole.hpp
 CMakeFiles/main.dir/src/NEE.cpp.o: ../include/core/aabb.hpp
 CMakeFiles/main.dir/src/NEE.cpp.o: ../include/core/constant.hpp
+CMakeFiles/main.dir/src/NEE.cpp.o: ../include/core/modelloader.hpp
 CMakeFiles/main.dir/src/NEE.cpp.o: ../include/core/object.hpp
+CMakeFiles/main.dir/src/NEE.cpp.o: ../include/core/polygon.hpp
 CMakeFiles/main.dir/src/NEE.cpp.o: ../include/core/ray.hpp
 CMakeFiles/main.dir/src/NEE.cpp.o: ../include/core/renderer.hpp
 CMakeFiles/main.dir/src/NEE.cpp.o: ../include/core/scene.hpp
+CMakeFiles/main.dir/src/NEE.cpp.o: ../include/external/tinyobjloader/mapbox/earcut.hpp
+CMakeFiles/main.dir/src/NEE.cpp.o: ../include/external/tinyobjloader/tiny_obj_loader.h
 CMakeFiles/main.dir/src/NEE.cpp.o: ../include/image/image.hpp
 CMakeFiles/main.dir/src/NEE.cpp.o: ../include/image/texture.hpp
 CMakeFiles/main.dir/src/NEE.cpp.o: ../include/integrator/integrator.hpp
@@ -22,9 +26,11 @@ CMakeFiles/main.dir/src/NEE.cpp.o: ../include/light/light.hpp
 CMakeFiles/main.dir/src/NEE.cpp.o: ../include/light/sky.hpp
 CMakeFiles/main.dir/src/NEE.cpp.o: ../include/math/vec2.hpp
 CMakeFiles/main.dir/src/NEE.cpp.o: ../include/math/vec3.hpp
+CMakeFiles/main.dir/src/NEE.cpp.o: ../include/math/vertex.hpp
 CMakeFiles/main.dir/src/NEE.cpp.o: ../include/sampling/rng.hpp
 CMakeFiles/main.dir/src/NEE.cpp.o: ../include/sampling/sampler.hpp
 CMakeFiles/main.dir/src/NEE.cpp.o: ../include/shape/shape.hpp
 CMakeFiles/main.dir/src/NEE.cpp.o: ../include/shape/shere.hpp
+CMakeFiles/main.dir/src/NEE.cpp.o: ../include/shape/triangle.hpp
 CMakeFiles/main.dir/src/NEE.cpp.o: ../src/NEE.cpp
 

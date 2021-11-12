@@ -34,7 +34,9 @@ class Pathtracer : public Integrator {
 
     // std::cout << "nextSampling" << std::endl;
       // wo: 入射方向,wi:反射方向
-      Vec3 wo = -next_ray.direction;
+      Vec3 t,b;
+      tangentSpaceBasis(info.normal,t,b);
+      Vec3 wo = worldtoLocal(-ray.direction,t,info.normal,b);
       Vec3 wi;
       float pdf;
       Vec3 bsdf;
@@ -42,10 +44,11 @@ class Pathtracer : public Integrator {
       // BSDF計算
       bsdf = info.object->sampleBSDF(wo, wi, pdf, sample);
 
-      const float cosine = std::abs(dot(wi, info.normal));
+      const Vec3 next_direction= localToWorld(wi,t,info.normal,b);
+      const float cosine = std::abs(dot(info.normal, next_direction));
       throughput *= bsdf * cosine / pdf;
 
-      next_ray = Ray(info.position + 0.001f * info.normal, wi);
+      next_ray = Ray(info.position + 0.001f * info.normal, next_direction);
       // std::cout << "Pathtrace_check" << std::endl;
     }
 
