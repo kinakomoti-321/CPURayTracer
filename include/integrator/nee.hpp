@@ -21,18 +21,19 @@ class NEE : public Integrator {
 
       IntersectInfo info;
       if (!scene.intersect(next_ray, info)) {
-        //segmentationErrorcheck
         if(depth == 0){
         LTE = throughput * scene.skyLe(next_ray);
-        break;
         }
+        break;
       }
 
     //  std::cout << "HiT" << std::endl;
       const Object& obj = *info.object;
     //  std::cout << "E" << std::endl;
-      if (obj.hasLight() && depth == 0) {
+      if (obj.hasLight()) {
+        if(depth == 0){
         LTE += throughput * obj.Le();
+        }
         break;
       }
 

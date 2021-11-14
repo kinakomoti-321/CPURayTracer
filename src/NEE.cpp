@@ -38,8 +38,8 @@ int main()
 	auto sphere2 = std::make_shared<Sphere>(Vec3(0.0,1.0,3.0),1.0f);
 	auto sphere3 = std::make_shared<Sphere>(Vec3(0.0,1.0,-3.0),1.0f);
 	// auto sphere4 = std::make_shared<Sphere>(Vec3(0,-1001.0,0.0),1000.0f);
-	auto sphere5 = std::make_shared<Sphere>(Vec3(0.0,8.0,0.0),1.0f);
-	auto sphere6 = std::make_shared<Sphere>(Vec3(0.0,8.0,3.0),1.0f);
+	auto sphere5 = std::make_shared<Sphere>(Vec3(0.0,8.0,0.0),0.01f);
+	auto sphere6 = std::make_shared<Sphere>(Vec3(0.0,8.0,3.0),0.01f);
 
 
 	auto mat1 = std::make_shared<Lambert>(Vec3(0.8,0.2,0.2));
@@ -63,12 +63,12 @@ int main()
 	scene.addObject(obj2);
 	scene.addObject(obj3);
 	// scene.addObject(obj4);
-    scene.addObject(obj5);
+    // scene.addObject(obj5);
 	scene.addPolygon(mesh);
 	scene.addPolygon(mesh1);
 	scene.addPolygon(mesh2);
-	scene.addObject(obj6);
-	// scene.addPolygon(mesh3);
+	// scene.addObject(obj6);
+	scene.addPolygon(mesh3);
 
 	scene.build();
 
@@ -77,7 +77,7 @@ int main()
     const auto normalcheck = std::make_shared<NormalChecker>();
 	auto sampler = std::make_shared<RNGrandom>();
 	
-	Vec3 camPos = Vec3(8.0,2.5,0.0);
+	Vec3 camPos = Vec3(10.0,5,0.0);
 	Vec3 camLook = Vec3(-1.0,0.0,0.0);
 
 	const auto camera = std::make_shared<Pinhole>(camPos,camLook,Vec2(2.0),1.0f);
