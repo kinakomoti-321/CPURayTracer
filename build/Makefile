@@ -123,32 +123,32 @@ main/fast:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
-src/NEE.o: src/NEE.cpp.o
+src/BSDFtest.o: src/BSDFtest.cpp.o
 
-.PHONY : src/NEE.o
+.PHONY : src/BSDFtest.o
 
 # target to build an object file
-src/NEE.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/NEE.cpp.o
-.PHONY : src/NEE.cpp.o
+src/BSDFtest.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/BSDFtest.cpp.o
+.PHONY : src/BSDFtest.cpp.o
 
-src/NEE.i: src/NEE.cpp.i
+src/BSDFtest.i: src/BSDFtest.cpp.i
 
-.PHONY : src/NEE.i
+.PHONY : src/BSDFtest.i
 
 # target to preprocess a source file
-src/NEE.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/NEE.cpp.i
-.PHONY : src/NEE.cpp.i
+src/BSDFtest.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/BSDFtest.cpp.i
+.PHONY : src/BSDFtest.cpp.i
 
-src/NEE.s: src/NEE.cpp.s
+src/BSDFtest.s: src/BSDFtest.cpp.s
 
-.PHONY : src/NEE.s
+.PHONY : src/BSDFtest.s
 
 # target to generate assembly for a file
-src/NEE.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/NEE.cpp.s
-.PHONY : src/NEE.cpp.s
+src/BSDFtest.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/BSDFtest.cpp.s
+.PHONY : src/BSDFtest.cpp.s
 
 # Help Target
 help:
@@ -159,9 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... main"
-	@echo "... src/NEE.o"
-	@echo "... src/NEE.i"
-	@echo "... src/NEE.s"
+	@echo "... src/BSDFtest.o"
+	@echo "... src/BSDFtest.i"
+	@echo "... src/BSDFtest.s"
 .PHONY : help
 
 

@@ -10,13 +10,6 @@ class BSDF {
   virtual Vec3 samplingBSDF(const Vec3& wo, Vec3& wi, float& pdf,
                             const std::shared_ptr<Sampler>& sampler) const = 0;
   virtual Vec3 evaluateBSDF(const Vec3& wo,const Vec3& wi) const = 0;         
+  virtual float samplePDF(const Vec3& wi)const =0;
 };
 
-inline Vec3 cosineSampling(float u, float v, float& pdf) {
-  const float theta =
-      std::acos(std::clamp(1.0f - 2.0f * u, -1.0f, 1.0f)) / 2.0f;
-  const float phi = 2.0f * PI * v;
-  pdf = cos(theta) / PI;
-  return Vec3(std::cos(phi) * std::sin(theta), std::cos(theta),
-              std::sin(phi) * std::sin(theta));
-}

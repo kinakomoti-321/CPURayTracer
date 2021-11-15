@@ -22,6 +22,8 @@ class Scene{
             geometry.push_back(obj);
         } 
 
+        Scene(const std::shared_ptr<Sky>& sky = nullptr,const std::shared_ptr<Shape>& skySphere = nullptr): sky(sky),skySphere(skySphere){
+        } 
         void addObject(const std::shared_ptr<Object>& obj){
             geometry.push_back(obj);
         }

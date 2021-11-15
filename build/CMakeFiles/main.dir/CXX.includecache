@@ -18,12 +18,38 @@ math/vec3.hpp
 sampling/sampler.hpp
 ../include/BSDF/sampling/sampler.hpp
 
+../include/BSDF/grass.hpp
+cmath
+-
+memory
+-
+iostream
+-
+BSDF/bsdf.hpp
+../include/BSDF/BSDF/bsdf.hpp
+math/vec3.hpp
+../include/BSDF/math/vec3.hpp
+BSDF/specular.hpp
+../include/BSDF/BSDF/specular.hpp
+
 ../include/BSDF/lambert.hpp
 BSDF/bsdf.hpp
 ../include/BSDF/BSDF/bsdf.hpp
 core/constant.hpp
 ../include/BSDF/core/constant.hpp
 iostream
+-
+cmath
+-
+
+../include/BSDF/specular.hpp
+cmath
+-
+BSDF/bsdf.hpp
+../include/BSDF/BSDF/bsdf.hpp
+math/vec3.hpp
+../include/BSDF/math/vec3.hpp
+memory
 -
 
 ../include/camera/camera.hpp
@@ -364,7 +390,7 @@ memory
 core/aabb.hpp
 ../include/shape/core/aabb.hpp
 
-/home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/NEE.cpp
+/home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/BSDFtest.cpp
 iostream
 -
 math/vec3.hpp
@@ -403,6 +429,10 @@ core/polygon.hpp
 /home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/core/polygon.hpp
 math/vertex.hpp
 /home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/math/vertex.hpp
+BSDF/grass.hpp
+/home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/BSDF/grass.hpp
+BSDF/specular.hpp
+/home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/BSDF/specular.hpp
 memory
 -
 vector

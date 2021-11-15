@@ -47,11 +47,10 @@ class Pathtracer : public Integrator {
       const Vec3 next_direction= localToWorld(wi,t,info.normal,b);
       const float cosine = std::abs(dot(info.normal, next_direction));
       throughput *= bsdf * cosine / pdf;
-
-      next_ray = Ray(info.position + 0.001f * info.normal, next_direction);
+      next_ray = Ray(info.position , next_direction);
       // std::cout << "Pathtrace_check" << std::endl;
     }
-
+    // std::cout << "1 sample finished" << std::endl;
     return LTE;
   }
 };
