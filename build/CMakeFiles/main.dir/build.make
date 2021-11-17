@@ -57,27 +57,27 @@ include CMakeFiles/main.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/main.dir/flags.make
 
-CMakeFiles/main.dir/src/BSDFtest.cpp.o: CMakeFiles/main.dir/flags.make
-CMakeFiles/main.dir/src/BSDFtest.cpp.o: ../src/BSDFtest.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/main.dir/src/BSDFtest.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/src/BSDFtest.cpp.o -c /home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/BSDFtest.cpp
+CMakeFiles/main.dir/src/MIS.cpp.o: CMakeFiles/main.dir/flags.make
+CMakeFiles/main.dir/src/MIS.cpp.o: ../src/MIS.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/main.dir/src/MIS.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/main.dir/src/MIS.cpp.o -c /home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/MIS.cpp
 
-CMakeFiles/main.dir/src/BSDFtest.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/BSDFtest.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/BSDFtest.cpp > CMakeFiles/main.dir/src/BSDFtest.cpp.i
+CMakeFiles/main.dir/src/MIS.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/main.dir/src/MIS.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/MIS.cpp > CMakeFiles/main.dir/src/MIS.cpp.i
 
-CMakeFiles/main.dir/src/BSDFtest.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/BSDFtest.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/BSDFtest.cpp -o CMakeFiles/main.dir/src/BSDFtest.cpp.s
+CMakeFiles/main.dir/src/MIS.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/main.dir/src/MIS.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/MIS.cpp -o CMakeFiles/main.dir/src/MIS.cpp.s
 
 # Object files for target main
 main_OBJECTS = \
-"CMakeFiles/main.dir/src/BSDFtest.cpp.o"
+"CMakeFiles/main.dir/src/MIS.cpp.o"
 
 # External object files for target main
 main_EXTERNAL_OBJECTS =
 
-main: CMakeFiles/main.dir/src/BSDFtest.cpp.o
+main: CMakeFiles/main.dir/src/MIS.cpp.o
 main: CMakeFiles/main.dir/build.make
 main: /usr/lib/gcc/x86_64-linux-gnu/9/libgomp.so
 main: /usr/lib/x86_64-linux-gnu/libpthread.so

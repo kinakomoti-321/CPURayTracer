@@ -123,32 +123,32 @@ main/fast:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
-src/BSDFtest.o: src/BSDFtest.cpp.o
+src/MIS.o: src/MIS.cpp.o
 
-.PHONY : src/BSDFtest.o
+.PHONY : src/MIS.o
 
 # target to build an object file
-src/BSDFtest.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/BSDFtest.cpp.o
-.PHONY : src/BSDFtest.cpp.o
+src/MIS.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/MIS.cpp.o
+.PHONY : src/MIS.cpp.o
 
-src/BSDFtest.i: src/BSDFtest.cpp.i
+src/MIS.i: src/MIS.cpp.i
 
-.PHONY : src/BSDFtest.i
+.PHONY : src/MIS.i
 
 # target to preprocess a source file
-src/BSDFtest.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/BSDFtest.cpp.i
-.PHONY : src/BSDFtest.cpp.i
+src/MIS.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/MIS.cpp.i
+.PHONY : src/MIS.cpp.i
 
-src/BSDFtest.s: src/BSDFtest.cpp.s
+src/MIS.s: src/MIS.cpp.s
 
-.PHONY : src/BSDFtest.s
+.PHONY : src/MIS.s
 
 # target to generate assembly for a file
-src/BSDFtest.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/BSDFtest.cpp.s
-.PHONY : src/BSDFtest.cpp.s
+src/MIS.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/MIS.cpp.s
+.PHONY : src/MIS.cpp.s
 
 # Help Target
 help:
@@ -159,9 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... main"
-	@echo "... src/BSDFtest.o"
-	@echo "... src/BSDFtest.i"
-	@echo "... src/BSDFtest.s"
+	@echo "... src/MIS.o"
+	@echo "... src/MIS.i"
+	@echo "... src/MIS.s"
 .PHONY : help
 
 

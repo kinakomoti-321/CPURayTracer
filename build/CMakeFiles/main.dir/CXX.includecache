@@ -85,6 +85,10 @@ math/vec3.hpp
 ../include/core/math/vec3.hpp
 
 ../include/core/constant.hpp
+iostream
+-
+string
+-
 
 ../include/core/modelloader.hpp
 external/tinyobjloader/tiny_obj_loader.h
@@ -258,6 +262,18 @@ core/scene.hpp
 sampling/sampler.hpp
 ../include/integrator/sampling/sampler.hpp
 
+../include/integrator/mis.hpp
+core/ray.hpp
+../include/integrator/core/ray.hpp
+core/scene.hpp
+../include/integrator/core/scene.hpp
+sampling/sampler.hpp
+../include/integrator/sampling/sampler.hpp
+integrator/integrator.hpp
+../include/integrator/integrator/integrator.hpp
+core/constant.hpp
+../include/integrator/core/constant.hpp
+
 ../include/integrator/nee.hpp
 core/object.hpp
 ../include/integrator/core/object.hpp
@@ -390,7 +406,7 @@ memory
 core/aabb.hpp
 ../include/shape/core/aabb.hpp
 
-/home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/BSDFtest.cpp
+/home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/MIS.cpp
 iostream
 -
 math/vec3.hpp
@@ -433,6 +449,8 @@ BSDF/grass.hpp
 /home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/BSDF/grass.hpp
 BSDF/specular.hpp
 /home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/BSDF/specular.hpp
+integrator/mis.hpp
+/home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/integrator/mis.hpp
 memory
 -
 vector
