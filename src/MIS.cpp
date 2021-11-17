@@ -19,8 +19,10 @@
 #include "math/vertex.hpp"
 #include "BSDF/grass.hpp"
 #include "BSDF/specular.hpp"
+#include "integrator/mis.hpp"
 #include <memory>
 #include <vector>
+
 int main()
 {
 	std::cout << "Hello World" << std::endl;
@@ -65,7 +67,7 @@ int main()
 	auto mesh2 = std::make_shared<Polygon>("cornelBox_R.obj",mat2);
 	auto mesh3 = std::make_shared<Polygon>("poly_Le.obj",mat4,lit1);
 	Scene scene(std::make_shared<Sky>(Vec3(0.0)),std::make_shared<Sphere>(Vec3(0.0),1000.0f));
-	// scene.addObject(obj2);
+	scene.addObject(obj2);
 	scene.addObject(obj1);
 	// scene.addObject(obj3);
 	// scene.addObject(obj4);
@@ -78,7 +80,8 @@ int main()
 
 	scene.build();
 
-	const auto integrator = std::make_shared<NEE>();
+	const auto integrator = std::make_shared<MIS>();
+	const auto nee = std::make_shared<NEE>();
     const auto pathtracer = std::make_shared<Pathtracer>();
     const auto normalcheck = std::make_shared<NormalChecker>();
 	auto sampler = std::make_shared<RNGrandom>();
@@ -89,9 +92,12 @@ int main()
 	const auto camera = std::make_shared<Pinhole>(camPos,camLook,Vec2(2.0),1.0f);
 
 	Renderer renderer(width,height,integrator,camera);
-	renderer.timeRender(scene,50000,"BSDFtest",sampler);
-	
-	renderer.reset(width,height,pathtracer,camera);
-	renderer.timeRender(scene,50000,"PathTracer",sampler);
+	renderer.render(scene,10,"MIStest",sampler);
+
+	// renderer.reset(width,height,nee,camera);	
+	// renderer.timeRender(scene,50000,"nee",sampler);
+
+	// renderer.reset(width,height,pathtracer,camera);	
+	// renderer.timeRender(scene,50000,"pathtrace",sampler);
 	return 0;
 }

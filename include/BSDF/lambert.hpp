@@ -13,6 +13,14 @@ inline Vec3 cosineSampling(float u, float v, float& pdf) {
               std::sin(phi) * std::sin(theta));
 }
 
+inline Vec3 SphereSampling(float u,float v,float &pdf){
+  const float theta = std::acos(std::max(1.0f - u,0.0f));
+  float phi = 2.0f * PI * v;
+  pdf = 1.0f / (2.0f * PI);
+  return Vec3(std::cos(phi) * std::sin(theta), std::cos(theta),
+              std::sin(phi) * std::sin(theta));
+}
+
 class Lambert : public BSDF {
  private:
   Vec3 rho;
@@ -20,13 +28,14 @@ class Lambert : public BSDF {
  public:
   Lambert(const Vec3& rho) : rho(rho){};
   Vec3 samplingBSDF(const Vec3& wo, Vec3& wi, float& pdf,const std::shared_ptr<Sampler>& sampler)const override {
-    wi = cosineSampling(sampler->sample(), sampler->sample(), pdf);
+    wi = SphereSampling(sampler->sample(), sampler->sample(), pdf);
     return rho * PI_INV;
   }
   Vec3 evaluateBSDF(const Vec3& wo,const Vec3& wi)const override{
+    // DebugLog("test",rho * PI_INV);
     return rho * PI_INV;
   }
   float samplePDF(const Vec3& wi)const override{
-    return std::abs(wi[1]) / PI;
+    return 0.5f * PI_INV;
   }
 };

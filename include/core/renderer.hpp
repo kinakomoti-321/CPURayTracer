@@ -44,7 +44,7 @@ class Renderer {
     std::cout << "Render Start" << std::endl;
     auto start = std::chrono::system_clock::now();
     
-    #pragma omp parallel for schedule(dynamic,1)
+    // #pragma omp parallel for schedule(dynamic,1)
     for(int i = 0; i < width; i++){
       for(int j = 0; j < height; j++){
         Vec3 sumRadiance(0.0);
