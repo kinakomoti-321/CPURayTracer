@@ -11,6 +11,6 @@ constexpr float PI_INV2 = 1.0f / PI2;
 constexpr float PI_INV4 = 1.0f / PI4;
 
 template <class T>
-inline void DebugLog(const std::string& s,const T& a){
-    std::cout << s << " : "<< a<<std::endl;
+inline void DebugLog(const std::string& s, const T& a) {
+    std::cout << s << " : " << a << std::endl;
 }

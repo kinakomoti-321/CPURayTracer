@@ -6,7 +6,8 @@
 #include <iostream>
 class NEE : public Integrator {
 public:
-  Vec3 integrate(const Ray& ray, const Scene& scene, std::shared_ptr<Sampler>& sample) const override {
+  Vec3 integrate(const Ray& ray, const Scene& scene,
+    std::shared_ptr<Sampler>& sampler) const override {
     const int MaxDepth = 100;
     float p = 0.99;
     Vec3 throughput(1.0);
@@ -16,7 +17,7 @@ public:
     for (int depth = 0; depth < MaxDepth; depth++) {
       // Russian roulette
       p = std::min(std::max(std::max(throughput[0], throughput[1]), throughput[2]), 1.0f);
-      if (sample->sample() > p) break;
+      if (sampler->sample() > p) break;
       throughput /= p;
 
       IntersectInfo info;
@@ -27,22 +28,16 @@ public:
         break;
       }
 
-      //  std::cout << "HiT" << std::endl;
       const Object& obj = *info.object;
-      //  std::cout << "E" << std::endl;
       if (obj.hasLight()) {
         if (depth == 0) {
           LTE += throughput * obj.Le();
-        }
-        else {
-
         }
         break;
       }
 
 
-      // std::cout << "nextSampling" << std::endl;
-        // wo: 入射方向,wi:反射方向
+      // wo: 入射方向,wi:反射方向
       Vec3 wo = -next_ray.direction;
       Vec3 wi;
       float pdf;
@@ -54,7 +49,7 @@ public:
 
       //光源サンプリング
       IntersectInfo lightInfo;
-      Vec3 lightPos = scene.lightPointSampling(sample, lightInfo, pdf);
+      Vec3 lightPos = scene.lightPointSampling(sampler, lightInfo, pdf);
 
       Vec3 lightDir = normalize(lightPos - info.position);
       Ray shadowRay(info.position, lightDir);
@@ -74,20 +69,20 @@ public:
 
         bsdf = info.object->evaluateBSDF(local_wo, local_wi);
 
-        // std::cout << "cosine1 : " << cosine1<< std::endl;
-        // std::cout << "cosine2 : " << cosine2<<std::endl;
-        // std::cout << "light_normal : " <<lightInfo.normal <<std::endl;
-        // std::cout << "light_distance : " <<lightInfo.distance <<std::endl;
-        // std::cout << "lightDir : " << -lightDir << cosine2<<std::endl;
-        // std::cout << "wi : " << wi<<std::endl;
-        // std::cout << "bsdf : " << bsdf<<std::endl;
-        float waight = cosine1 * cosine2 / (lightInfo.distance * lightInfo.distance);
+        float G = cosine2 / (lightInfo.distance * lightInfo.distance);
 
-        LTE += throughput * (bsdf * waight / pdf) * lightInfo.object->Le();
+        // DebugLog("cosine1", cosine1);
+        // DebugLog("cosine2", cosine2);
+        // DebugLog("dis2", lightInfo.distance * lightInfo.distance);
+        // DebugLog("bsdf", bsdf);
+        // DebugLog("G", G);
+        // DebugLog("lightPdf", pdf);
+
+        LTE += throughput * (bsdf * G * cosine1 / pdf) * lightInfo.object->Le();
       }
-      wo = worldtoLocal(-ray.direction, t, info.normal, b);
+      wo = worldtoLocal(-next_ray.direction, t, info.normal, b);
       // BSDF計算
-      bsdf = info.object->sampleBSDF(wo, wi, pdf, sample);
+      bsdf = info.object->sampleBSDF(wo, wi, pdf, sampler);
 
       const Vec3 next_direction = localToWorld(wi, t, info.normal, b);
       const float cosine = std::abs(dot(info.normal, next_direction));
@@ -97,5 +92,6 @@ public:
     }
 
     return LTE;
-  }
+
+  };
 };

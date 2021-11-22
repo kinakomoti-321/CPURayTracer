@@ -87,7 +87,7 @@ public:
         if (idx == lightgeo.size()) idx--;
 
         weight = 1.0f / (lightgeo[idx]->areaShape() * lightgeo.size());
-
+        // DebugLog("weight", weight);
         return lightgeo[idx]->areaSampling(sampler, info);
     }
 
