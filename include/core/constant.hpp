@@ -14,3 +14,7 @@ template <class T>
 inline void DebugLog(const std::string& s, const T& a) {
     std::cout << s << " : " << a << std::endl;
 }
+
+inline void DebugLog(const std::string& s) {
+    std::cout << s << std::endl;
+}

@@ -4,7 +4,7 @@ project(main LANGUAGES C CXX)
 #openMP
 find_package(OpenMP)
 
-add_executable(main "src/MIS.cpp")
+add_executable(main "src/GGX.cpp")
 target_compile_features(main PRIVATE cxx_std_17)
 target_include_directories(main PRIVATE "include")
 

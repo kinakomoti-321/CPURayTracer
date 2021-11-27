@@ -123,32 +123,32 @@ main/fast:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
-src/MIS.o: src/MIS.cpp.o
+src/GGX.o: src/GGX.cpp.o
 
-.PHONY : src/MIS.o
+.PHONY : src/GGX.o
 
 # target to build an object file
-src/MIS.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/MIS.cpp.o
-.PHONY : src/MIS.cpp.o
+src/GGX.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GGX.cpp.o
+.PHONY : src/GGX.cpp.o
 
-src/MIS.i: src/MIS.cpp.i
+src/GGX.i: src/GGX.cpp.i
 
-.PHONY : src/MIS.i
+.PHONY : src/GGX.i
 
 # target to preprocess a source file
-src/MIS.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/MIS.cpp.i
-.PHONY : src/MIS.cpp.i
+src/GGX.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GGX.cpp.i
+.PHONY : src/GGX.cpp.i
 
-src/MIS.s: src/MIS.cpp.s
+src/GGX.s: src/GGX.cpp.s
 
-.PHONY : src/MIS.s
+.PHONY : src/GGX.s
 
 # target to generate assembly for a file
-src/MIS.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/MIS.cpp.s
-.PHONY : src/MIS.cpp.s
+src/GGX.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GGX.cpp.s
+.PHONY : src/GGX.cpp.s
 
 # Help Target
 help:
@@ -159,9 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... main"
-	@echo "... src/MIS.o"
-	@echo "... src/MIS.i"
-	@echo "... src/MIS.s"
+	@echo "... src/GGX.o"
+	@echo "... src/GGX.i"
+	@echo "... src/GGX.s"
 .PHONY : help
 
 

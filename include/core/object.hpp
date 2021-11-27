@@ -25,8 +25,8 @@ public:
   Vec3 evaluateBSDF(const Vec3& wo, Vec3& wi) {
     return bsdf->evaluateBSDF(wo, wi);
   }
-  float BSDFpdf(const Vec3& wi) {
-    return bsdf->samplePDF(wi);
+  float BSDFpdf(const Vec3& wo, const Vec3& wi) {
+    return bsdf->samplePDF(wo, wi);
   }
   Vec3 Le() const {
     return light->Le();

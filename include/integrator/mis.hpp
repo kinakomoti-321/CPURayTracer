@@ -80,11 +80,11 @@ public:
                     Vec3 local_wi = worldtoLocal(wi, t, info.normal, b);
 
                     bsdf = info.object->evaluateBSDF(local_wo, local_wi);
-                    //幾何項
+                    //幾何項(ヤコビアン部分)
                     float G = cosine2 / (lightInfo.distance * lightInfo.distance);
 
                     //MISweight
-                    float bsdfPDF = info.object->BSDFpdf(wi) * G; //PathtraceにおけるPDF
+                    float bsdfPDF = info.object->BSDFpdf(wo, wi) * G; //PathtraceにおけるPDF
                     float MISweight = pdf / (bsdfPDF + pdf);
 
                     //result
@@ -106,12 +106,11 @@ public:
                 if (scene.intersect(lightRay, lightInfo)) {
                     if (lightInfo.object->hasLight()) {
                         //衝突かつその物体がLight
-
                         float cosine1 = absdot(info.normal, nextDir);
                         float cosine2 = absdot(lightInfo.normal, -nextDir);
                         float dis2 = lightInfo.distance * lightInfo.distance;
 
-                        //幾何項の逆数
+                        //幾何項(ヤコビアン)の逆数
                         float invG = dis2 / cosine2;
 
                         //MISweight

@@ -200,6 +200,10 @@ inline void tangentSpaceBasis(const Vec3& n, Vec3& t, Vec3& b)
   b = normalize(b);
 }
 
+inline Vec3 reflect(const Vec3& v, const Vec3& n) {
+  return  -v + 2.0f * dot(v, n) * n;
+}
+
 inline std::ostream& operator<<(std::ostream& stream, const Vec3& v) {
   stream << "(" << v[0] << ", " << v[1] << ", " << v[2] << ")";
   return stream;

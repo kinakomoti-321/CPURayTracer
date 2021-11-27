@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/MIS.cpp" "/home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/build/CMakeFiles/main.dir/src/MIS.cpp.o"
+  "/home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/GGX.cpp" "/home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/build/CMakeFiles/main.dir/src/GGX.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

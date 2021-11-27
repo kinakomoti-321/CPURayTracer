@@ -14,7 +14,7 @@ public:
     // std::cout << "start" << std::endl;
     for (int i = 0; i < MaxDepth; i++) {
       // Russian roulette
-      p = std::min(std::max(std::max(throughput[0], throughput[1]), throughput[2]), 1.0f);
+      p = 0.9;
       if (sample->sample() > p) break;
       throughput /= p;
 
@@ -48,6 +48,8 @@ public:
       const Vec3 next_direction = localToWorld(wi, t, info.normal, b);
       const float cosine = std::abs(dot(info.normal, next_direction));
       throughput *= bsdf * cosine / pdf;
+      // DebugLog("cosine", cosine);
+      // DebugLog("through", bsdf * cosine / pdf);
       next_ray = Ray(info.position, next_direction);
       // std::cout << "Pathtrace_check" << std::endl;
     }

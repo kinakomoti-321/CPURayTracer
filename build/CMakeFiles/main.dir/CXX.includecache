@@ -11,12 +11,30 @@ algorithm
 -
 cmath
 -
+memory
+-
 core/constant.hpp
 ../include/BSDF/core/constant.hpp
 math/vec3.hpp
 ../include/BSDF/math/vec3.hpp
 sampling/sampler.hpp
 ../include/BSDF/sampling/sampler.hpp
+
+../include/BSDF/ggx.hpp
+BSDF/bsdf.hpp
+../include/BSDF/BSDF/bsdf.hpp
+core/constant.hpp
+../include/BSDF/core/constant.hpp
+iostream
+-
+cmath
+-
+BSDF/lambert.hpp
+../include/BSDF/BSDF/lambert.hpp
+math/vec3.hpp
+../include/BSDF/math/vec3.hpp
+memory
+-
 
 ../include/BSDF/grass.hpp
 cmath
@@ -406,7 +424,7 @@ memory
 core/aabb.hpp
 ../include/shape/core/aabb.hpp
 
-/home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/MIS.cpp
+/home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/GGX.cpp
 iostream
 -
 math/vec3.hpp
@@ -451,6 +469,8 @@ BSDF/specular.hpp
 /home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/BSDF/specular.hpp
 integrator/mis.hpp
 /home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/integrator/mis.hpp
+BSDF/ggx.hpp
+/home/kinakomoti/program/raytracing/CPU-raytracer/CPURayTracer/src/BSDF/ggx.hpp
 memory
 -
 vector
