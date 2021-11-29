@@ -22,6 +22,7 @@
 #include "BSDF/specular.hpp"
 #include "integrator/mis.hpp"
 #include "BSDF/ggx.hpp"
+#include "integrator/whitetest.hpp"
 #include <memory>
 #include <vector>
 
@@ -80,11 +81,11 @@ int main()
     // scene.addObject(obj3);
     // scene.addObject(obj4);
     // scene.addObject(obj5);
-    scene.addPolygon(mesh);
-    scene.addPolygon(mesh1);
-    scene.addPolygon(mesh2);
+    // scene.addPolygon(mesh);
+    // scene.addPolygon(mesh1);
+    // scene.addPolygon(mesh2);
     // scene.addObject(obj6);
-    scene.addPolygon(mesh3);
+    // scene.addPolygon(mesh3);
     // scene.addPolygon(mesh4);
     // scene.addPolygon(mesh5);
 
@@ -94,6 +95,7 @@ int main()
     const auto nee = std::make_shared<NEE>();
     const auto pathtracer = std::make_shared<Pathtracer>();
     const auto normalcheck = std::make_shared<NormalChecker>();
+    const auto whiteTest = std::make_shared<WhiteTest>();
     auto sampler = std::make_shared<RNGrandom>();
 
     Vec3 camPos = Vec3(15.0, 5, 0.0);
@@ -101,8 +103,8 @@ int main()
 
     const auto camera = std::make_shared<Pinhole>(camPos, camLook, Vec2(2.0), 2.0f);
 
-    Renderer renderer(width, height, mis, camera);
-    renderer.render(scene, 250, "GGXsampling_nee_1000", sampler);
+    Renderer renderer(width, height, whiteTest, camera);
+    renderer.render(scene, 100, "GGXmis_01", sampler);
 
     // renderer.reset(width, height, nee, camera);
     // renderer.timeRender(scene, 50000, "GGXnee_01", sampler);

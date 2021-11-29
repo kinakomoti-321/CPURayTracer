@@ -15,8 +15,10 @@ public:
 
 namespace BSDFMath {
   inline float cosTheta(const Vec3& w) { return w[1]; }
+  inline float cos2Theta(const Vec3& w) { return w[1] * w[1]; }
   inline float sinTheta(const Vec3& w) { return std::sqrt(std::max(1.0f - cosTheta(w) * cosTheta(w), 0.0f)); }
   inline float tanTheta(const Vec3& w) { return sinTheta(w) / cosTheta(w); }
+  inline float tan2Theta(const Vec3& w) { return tanTheta(w) * tanTheta(w); }
 
 
 }

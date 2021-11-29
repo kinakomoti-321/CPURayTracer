@@ -59,10 +59,15 @@ public:
 
         // float result = alpha * alpha * sign / (PI * cosm4 * delta * delta);
         // return result;
-        float cosm = BSDFMath::cosTheta(m);
-        cosm = cosm * cosm;
-        float delta = 1.0f - (1.0f - alpha * alpha) * cosm;
-        return alpha * alpha / (PI * delta * delta);
+        // float cosm = std::abs(m[1]);
+        // float delta = 1.0f - (1.0f - alpha * alpha) * cosm * cosm;
+        // return alpha * alpha / (PI * delta * delta);
+
+        const float tan2theta = BSDFMath::tan2Theta(m);
+        if (std::isinf(tan2theta)) return 0;
+        const float cos4theta = BSDFMath::cos2Theta(m) * BSDFMath::cos2Theta(m);
+        const float term = 1.0f + tan2theta / (alpha * alpha);
+        return 1.0f / ((PI * alpha * alpha * cos4theta) * term * term);
     }
 
     Vec3 samplingBSDF(const Vec3& wo, Vec3& wi, float& pdf,
@@ -96,7 +101,7 @@ public:
 
         pdf = D_ * BSDFMath::cosTheta(m) / (4.0f * absdot(m, o));
 
-        // if (brdf[1] > 1.0f) {
+        // if (brdf[1] < 0.01f) {
         //     DebugLog("F", F);
         //     DebugLog("G", G_);
         //     DebugLog("D", D_);
