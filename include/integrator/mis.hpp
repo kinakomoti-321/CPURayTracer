@@ -96,7 +96,7 @@ public:
             {
                 //方向サンプリング
                 float pathPdf;
-                wo = worldtoLocal(-ray.direction, t, info.normal, b);
+                wo = worldtoLocal(-next_ray.direction, t, info.normal, b);
                 Vec3 bsdf = info.object->sampleBSDF(wo, wi, pathPdf, sample);
                 const Vec3 nextDir = localToWorld(wi, t, info.normal, b);
 

@@ -37,7 +37,8 @@ public:
         // wo: 入射方向,wi:反射方向
       Vec3 t, b;
       tangentSpaceBasis(info.normal, t, b);
-      Vec3 wo = worldtoLocal(-ray.direction, t, info.normal, b);
+      Vec3 wo = worldtoLocal(-next_ray.direction, t, info.normal, b);
+      // DebugLog("wo", wo);
       Vec3 wi;
       float pdf;
       Vec3 bsdf;

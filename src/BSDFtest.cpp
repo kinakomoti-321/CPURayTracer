@@ -10,11 +10,17 @@ int main() {
     int Sampling = 1000000;
     auto BSDF = std::make_shared<GGX>(Vec3(0.9), 0.6f);
     RNGrandom rng(1000);
+    float Dcheck = 0.0;
+    float pdf;
+    Vec3 wo = SphereSampling(rng.sample(), rng.sample(), pdf);
     for (int i = 0; i < Sampling; i++) {
-        float pdf;
-        Vec3 wo = SphereSampling(rng.sample(), rng.sample(), pdf);
         Vec3 wi = SphereSampling(rng.sample(), rng.sample(), pdf);
         Vec3 bsdf = BSDF->evaluateBSDF(wo, wi);
+        Vec3 half = wi;
+        float D = BSDF->D(wi);
+        // DebugLog("D * half[1]", D * half[1]);
+        // DebugLog("h", half);
+        Dcheck += D * half[1];
 
         bool nancheck = std::isnan(bsdf[0]) || std::isnan(bsdf[1]) || std::isnan(bsdf[2]);
         bool infcheck = std::isinf(bsdf[0]) || std::isinf(bsdf[1]) || std::isinf(bsdf[2]);
@@ -33,6 +39,9 @@ int main() {
             if (minuscheck) DebugLog("minus");
         }
     }
+
+    DebugLog("Dcheck", Dcheck);
+
 
     return 0;
 }

@@ -53,8 +53,8 @@ int main()
 
     auto mat5 = std::make_shared<Specular>(Vec3(0.9));
     auto mat6 = std::make_shared<Grass>(Vec3(0.9), 1.5f);
-    auto mat7 = std::make_shared<GGX>(Vec3(0.9), 1.0f);
-    auto mat8 = std::make_shared<GGX>(Vec3(0.9), 0.7f);
+    auto mat7 = std::make_shared<GGX>(Vec3(0.9), 0.1f);
+    auto mat8 = std::make_shared<GGX>(Vec3(0.9), 0.3f);
     auto mat9 = std::make_shared<GGX>(Vec3(0.9), 0.5f);
 
 
@@ -101,8 +101,8 @@ int main()
 
     const auto camera = std::make_shared<Pinhole>(camPos, camLook, Vec2(2.0), 2.0f);
 
-    Renderer renderer(width, height, pathtracer, camera);
-    renderer.render(scene, 1000, "roughness", sampler);
+    Renderer renderer(width, height, mis, camera);
+    renderer.timeRender(scene, 50000, "GGXnee_01", sampler);
 
     // renderer.reset(width, height, nee, camera);
     // renderer.timeRender(scene, 50000, "nee_01", sampler);
