@@ -7,7 +7,7 @@
 class NEE : public Integrator {
 public:
   Vec3 integrate(const Ray& ray, const Scene& scene,
-    std::shared_ptr<Sampler>& sampler) const override {
+    std::shared_ptr<Sampler> sampler) const override {
     const int MaxDepth = 100;
     float p = 0.99;
     Vec3 throughput(1.0);

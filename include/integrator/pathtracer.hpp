@@ -5,7 +5,7 @@
 #include <iostream>
 class Pathtracer : public Integrator {
 public:
-  Vec3 integrate(const Ray& ray, const Scene& scene, std::shared_ptr<Sampler>& sample) const override {
+  Vec3 integrate(const Ray& ray, const Scene& scene, std::shared_ptr<Sampler> sample) const override {
     const int MaxDepth = 100;
     float p = 0.99;
     Vec3 throughput(1.0);

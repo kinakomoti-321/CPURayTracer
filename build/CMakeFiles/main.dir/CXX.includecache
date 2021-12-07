@@ -179,6 +179,8 @@ math/vec2.hpp
 ../include/core/math/vec2.hpp
 image/image.hpp
 ../include/core/image/image.hpp
+sampling/rng.hpp
+../include/core/sampling/rng.hpp
 string
 -
 chrono

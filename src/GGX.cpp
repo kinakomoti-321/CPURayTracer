@@ -92,7 +92,7 @@ int main()
 
     const auto mis = std::make_shared<MIS>();
     const auto nee = std::make_shared<NEE>();
-    const auto pathtracer = std::make_shared<Pathtracer>();
+    const auto pt = std::make_shared<Pathtracer>();
     const auto normalcheck = std::make_shared<NormalChecker>();
     auto sampler = std::make_shared<RNGrandom>();
 
@@ -102,12 +102,15 @@ int main()
     const auto camera = std::make_shared<Pinhole>(camPos, camLook, Vec2(2.0), 2.0f);
 
     Renderer renderer(width, height, mis, camera);
-    renderer.render(scene, 250, "GGXsampling_nee_1000", sampler);
+    renderer.timeRender(scene, 50000, "GGXmis_50sec", sampler);
+    // renderer.render(scene, 100, "GGXsampling_mis_100", sampler);
+    // renderer.render(scene, 200, "GGXsampling_mis_200", sampler);
+    // renderer.render(scene, 300, "GGXsampling_mis_300", sampler);
 
-    // renderer.reset(width, height, nee, camera);
-    // renderer.timeRender(scene, 50000, "GGXnee_01", sampler);
+    renderer.reset(width, height, nee, camera);
+    renderer.timeRender(scene, 50000, "GGXnee_50sec", sampler);
 
-    // renderer.reset(width, height, pathtracer, camera);
-    // renderer.timeRender(scene, 50000, "MISpt_01", sampler);
+    renderer.reset(width, height, pt, camera);
+    renderer.timeRender(scene, 50000, "MISpt_50sec", sampler);
     return 0;
 }

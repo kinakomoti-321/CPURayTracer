@@ -10,6 +10,7 @@
 #include "integrator/integrator.hpp"
 #include "math/vec2.hpp"
 #include "image/image.hpp"
+#include "sampling/rng.hpp"
 #include <string>
 #include <chrono>
 class Renderer {
@@ -48,16 +49,16 @@ public:
     for (int i = 0; i < width; i++) {
       for (int j = 0; j < height; j++) {
         Vec3 sumRadiance(0.0);
-        sampler->reset(i + width * j);
+        auto sampler1 = std::make_shared<RNGrandom>(i + width * j);
         // std::cout << i << " : " << j << ": samplingStart" << std::endl;
         for (int k = 0; k < sampling; k++) {
           Vec2 cameraUV;
           cameraUV[0] = (2.0f * (i + sampler->sample() - 0.5f) - width) / height;
           cameraUV[1] = (2.0f * (j + sampler->sample() - 0.5f) - height) / height;
           float cweight;
-          Ray cameraray = camera->getRay(cameraUV, sampler, cweight);
+          Ray cameraray = camera->getRay(cameraUV, sampler1, cweight);
           // std::cout << "Integrate Start" << std::endl;
-          sumRadiance += cweight * integrator->integrate(cameraray, scene, sampler);
+          sumRadiance += cweight * integrator->integrate(cameraray, scene, sampler1);
         }
 
         // std::cout << i << " : " << j << ": sampling End" << std::endl;
@@ -84,13 +85,13 @@ public:
 #pragma omp parallel for schedule(dynamic,1)
       for (int j = 0; j < height; j++) {
         for (int i = 0; i < width; i++) {
-          sampler->reset(i + width * j + width * height * counter);
+          auto sampler1 = std::make_shared<RNGrandom>(i + width * j + width * height * counter);
           Vec2 cameraUV;
           cameraUV[0] = (2.0f * (i + sampler->sample() - 0.5f) - width) / height;
           cameraUV[1] = (2.0f * (j + sampler->sample() - 0.5f) - height) / height;
           float cweight;
-          Ray cameraray = camera->getRay(cameraUV, sampler, cweight);
-          Vec3 radiance = cweight * integrator->integrate(cameraray, scene, sampler);
+          Ray cameraray = camera->getRay(cameraUV, sampler1, cweight);
+          Vec3 radiance = cweight * integrator->integrate(cameraray, scene, sampler1);
           img->addPixel(i, j, radiance);
         }
       }

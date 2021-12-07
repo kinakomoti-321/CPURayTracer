@@ -9,7 +9,7 @@ class MIS :public Integrator {
 public:
 
     //Multiple Importance Sampling by Multi Sample Model. BalanceHeuristic
-    Vec3 integrate(const Ray& ray, const Scene& scene, std::shared_ptr<Sampler>& sample) const override {
+    Vec3 integrate(const Ray& ray, const Scene& scene, std::shared_ptr<Sampler> sample) const override {
         float p = 1.0; //Probability Rossian Roulette
         const unsigned int MaxDepth = 100; //Max of RayDepth
         Vec3 LTE = Vec3(0.0); //Result of Radiance
@@ -56,11 +56,11 @@ public:
 
             //NEE
             {
+                wo = -next_ray.direction;
                 //光源サンプリング
                 IntersectInfo lightInfo;
                 Vec3 lightPos = scene.lightPointSampling(sample, lightInfo, pdf);
 
-                //LightPath生成
                 Vec3 lightDir = normalize(lightPos - info.position);
                 Ray shadowRay(info.position, lightDir);
                 lightInfo.distance = norm(lightPos - info.position);
@@ -68,9 +68,7 @@ public:
                 shadowRay.Max = lightInfo.distance - 0.001f;
                 IntersectInfo shadowInfo;
 
-                if (!scene.intersect(shadowRay, shadowInfo)) {
-                    //LightPathの接続が成功
-
+                if (!scene.intersect(shadowRay, shadowInfo) && dot(lightInfo.normal, lightDir) < 0.0f) {
                     float cosine1 = std::abs(dot(info.normal, lightDir));
                     float cosine2 = std::abs(dot(lightInfo.normal, -lightDir));
 
@@ -80,14 +78,19 @@ public:
                     Vec3 local_wi = worldtoLocal(wi, t, info.normal, b);
 
                     bsdf = info.object->evaluateBSDF(local_wo, local_wi);
-                    //幾何項(ヤコビアン部分)
+
+                    float lightPDF = pdf;
                     float G = cosine2 / (lightInfo.distance * lightInfo.distance);
 
-                    //MISweight
-                    float bsdfPDF = info.object->BSDFpdf(wo, wi) * G; //PathtraceにおけるPDF
-                    float MISweight = pdf / (bsdfPDF + pdf);
+                    // DebugLog("cosine1", cosine1);
+                    // DebugLog("cosine2", cosine2);
+                    // DebugLog("dis2", lightInfo.distance * lightInfo.distance);
+                    // DebugLog("bsdf", bsdf);
+                    // DebugLog("G", G);
+                    // DebugLog("lightPdf", pdf);
 
-                    //result
+                    float pathPDF = info.object->BSDFpdf(wo, wi) * G;
+                    float MISweight = lightPDF / (lightPDF + pathPDF);
                     LTE += throughput * MISweight * (bsdf * G * cosine1 / pdf) * lightInfo.object->Le();
                 }
             }
@@ -104,7 +107,7 @@ public:
                 IntersectInfo lightInfo;
 
                 if (scene.intersect(lightRay, lightInfo)) {
-                    if (lightInfo.object->hasLight()) {
+                    if (lightInfo.object->hasLight() && dot(lightInfo.normal, lightRay.direction) < 0.0f) {
                         //衝突かつその物体がLight
                         float cosine1 = absdot(info.normal, nextDir);
                         float cosine2 = absdot(lightInfo.normal, -nextDir);
@@ -119,7 +122,7 @@ public:
                         float MISweight = pathPdf / (pathPdf + lightPdf);
 
                         //Result
-                        LTE += throughput * cosine1 * MISweight * lightInfo.object->Le() * bsdf / pathPdf;
+                        LTE += throughput * MISweight * cosine1 * lightInfo.object->Le() * bsdf / pathPdf;
                     }
                 }
             }
