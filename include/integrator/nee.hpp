@@ -80,6 +80,7 @@ public:
 
         LTE += throughput * (bsdf * G * cosine1 / pdf) * lightInfo.object->Le();
       }
+
       wo = worldtoLocal(-next_ray.direction, t, info.normal, b);
       // BSDF計算
       bsdf = info.object->sampleBSDF(wo, wi, pdf, sampler);
@@ -88,7 +89,9 @@ public:
       const float cosine = std::abs(dot(info.normal, next_direction));
       throughput *= bsdf * cosine / pdf;
 
-      next_ray = Ray(info.position + 0.001f * info.normal, next_direction);
+      DebugLog("throughput", throughput);
+
+      next_ray = Ray(info.position + 0.001f * next_direction, next_direction);
     }
 
     return LTE;

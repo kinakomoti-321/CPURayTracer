@@ -7,6 +7,7 @@ struct Ray {
   Vec3 direction;
   float Min = 0.001;
   float Max = 100000;
+  bool is_inside = false;
 
   Ray(const Vec3& origin, const Vec3& direction)
     : origin(origin), direction(direction) {}

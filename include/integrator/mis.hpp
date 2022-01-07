@@ -68,7 +68,7 @@ public:
                 shadowRay.Max = lightInfo.distance - 0.001f;
                 IntersectInfo shadowInfo;
 
-                if (!scene.intersect(shadowRay, shadowInfo) && dot(lightInfo.normal, lightDir) < 0.0f) {
+                if (!scene.intersect(shadowRay, shadowInfo)) {
                     float cosine1 = std::abs(dot(info.normal, lightDir));
                     float cosine2 = std::abs(dot(lightInfo.normal, -lightDir));
 
@@ -78,19 +78,14 @@ public:
                     Vec3 local_wi = worldtoLocal(wi, t, info.normal, b);
 
                     bsdf = info.object->evaluateBSDF(local_wo, local_wi);
-
+                    //MISWightの計算
                     float lightPDF = pdf;
+                    //幾何項（ヤコビアン）の計算
                     float G = cosine2 / (lightInfo.distance * lightInfo.distance);
-
-                    // DebugLog("cosine1", cosine1);
-                    // DebugLog("cosine2", cosine2);
-                    // DebugLog("dis2", lightInfo.distance * lightInfo.distance);
-                    // DebugLog("bsdf", bsdf);
-                    // DebugLog("G", G);
-                    // DebugLog("lightPdf", pdf);
-
-                    float pathPDF = info.object->BSDFpdf(wo, wi) * G;
+                    //PTでのPDF
+                    float pathPDF = info.object->BSDFpdf(local_wo, local_wi) * G;
                     float MISweight = lightPDF / (lightPDF + pathPDF);
+                    //寄与の追加
                     LTE += throughput * MISweight * (bsdf * G * cosine1 / pdf) * lightInfo.object->Le();
                 }
             }
@@ -107,7 +102,7 @@ public:
                 IntersectInfo lightInfo;
 
                 if (scene.intersect(lightRay, lightInfo)) {
-                    if (lightInfo.object->hasLight() && dot(lightInfo.normal, lightRay.direction) < 0.0f) {
+                    if (lightInfo.object->hasLight()) {
                         //衝突かつその物体がLight
                         float cosine1 = absdot(info.normal, nextDir);
                         float cosine2 = absdot(lightInfo.normal, -nextDir);
@@ -120,7 +115,7 @@ public:
                         //NEEでのPDF
                         float lightPdf = 1.0f / (lightInfo.object->areaShape() * scene.getLightN()) * invG;
                         float MISweight = pathPdf / (pathPdf + lightPdf);
-
+                        // MISweight = 1.0f;
                         //Result
                         LTE += throughput * MISweight * cosine1 * lightInfo.object->Le() * bsdf / pathPdf;
                     }
@@ -137,7 +132,7 @@ public:
             throughput *= bsdf * cosine / pdf;
 
             //次のレイ
-            next_ray = Ray(info.position + 0.001f * info.normal, next_direction);
+            next_ray = Ray(info.position + 0.001f * next_direction, next_direction);
         }
 
         return LTE;

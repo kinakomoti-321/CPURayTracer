@@ -52,19 +52,18 @@ int main()
     auto mat4 = std::make_shared<Lambert>(Vec3(0.9));
 
     auto mat5 = std::make_shared<Specular>(Vec3(0.9));
-    auto mat6 = std::make_shared<Grass>(Vec3(0.9), 1.5f);
     auto mat7 = std::make_shared<GGX>(Vec3(0.9), 0.1f);
     auto mat8 = std::make_shared<GGX>(Vec3(0.9), 0.3f);
     auto mat9 = std::make_shared<GGX>(Vec3(0.9), 0.5f);
-
+    auto mat10 = std::make_shared<GGX_anistropic>(Vec3(0.9), 0.5f, 0.5f);
 
     auto lit1 = std::make_shared<Light>(Vec3(1.0, 0.9, 0.9), 5.0);
 
-    auto obj1 = std::make_shared<Object>(sphere1, mat1);
-    auto obj2 = std::make_shared<Object>(sphere2, mat7);
-    auto obj3 = std::make_shared<Object>(sphere3, mat6);
-    auto obj4 = std::make_shared<Object>(sphere4, mat9);
-    auto obj5 = std::make_shared<Object>(sphere5, mat8);
+    // auto obj1 = std::make_shared<Object>(sphere1, mat1);
+    auto obj2 = std::make_shared<Object>(sphere2, mat8);
+    // auto obj3 = std::make_shared<Object>(sphere3, mat6);
+    auto obj4 = std::make_shared<Object>(sphere4, mat7);
+    auto obj5 = std::make_shared<Object>(sphere5, mat10);
     // auto obj4 = std::make_shared<Object>(sphere4,mat4);
     auto mesh = std::make_shared<Polygon>("cornelBox.obj", mat4);
     auto mesh1 = std::make_shared<Polygon>("cornelBox_L.obj", mat1);
@@ -101,16 +100,16 @@ int main()
 
     const auto camera = std::make_shared<Pinhole>(camPos, camLook, Vec2(2.0), 2.0f);
 
-    Renderer renderer(width, height, mis, camera);
-    renderer.timeRender(scene, 50000, "GGXmis_50sec", sampler);
-    // renderer.render(scene, 100, "GGXsampling_mis_100", sampler);
-    // renderer.render(scene, 200, "GGXsampling_mis_200", sampler);
-    // renderer.render(scene, 300, "GGXsampling_mis_300", sampler);
+    Renderer renderer(width, height, pt, camera);
+    renderer.render(scene, 100, "GGXanistropic_50_1sec", sampler);
+    // // renderer.render(scene, 100, "GGXsampling_mis_100", sampler);
+    // // renderer.render(scene, 200, "GGXsampling_mis_200", sampler);
+    // // renderer.render(scene, 300, "GGXsampling_mis_300", sampler);
 
-    renderer.reset(width, height, nee, camera);
-    renderer.timeRender(scene, 50000, "GGXnee_50sec", sampler);
+    // renderer.reset(width, height, nee, camera);
+    // renderer.render(scene, 50, "NEE_50sample", sampler);
 
-    renderer.reset(width, height, pt, camera);
-    renderer.timeRender(scene, 50000, "MISpt_50sec", sampler);
+    // renderer.reset(width, height, pt, camera);
+    // renderer.render(scene, 100, "PT_100sample", sampler);
     return 0;
 }

@@ -82,7 +82,7 @@ public:
 
     while (std::chrono::duration_cast<std::chrono::milliseconds>(now - start).count() < time) {
       ++counter;
-#pragma omp parallel for schedule(dynamic,1)
+      // #pragma omp parallel for schedule(dynamic,1)
       for (int j = 0; j < height; j++) {
         for (int i = 0; i < width; i++) {
           auto sampler1 = std::make_shared<RNGrandom>(i + width * j + width * height * counter);

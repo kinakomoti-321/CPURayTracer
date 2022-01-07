@@ -8,7 +8,7 @@
 int main() {
 
     int Sampling = 1000000;
-    auto BSDF = std::make_shared<GGX>(Vec3(0.9), 0.6f);
+    auto BSDF = std::make_shared<GGX_anistropic>(Vec3(0.9), 0.5f, 0.1f);
     RNGrandom rng(1000);
     float Dcheck = 0.0;
     float pdf;
@@ -20,7 +20,7 @@ int main() {
         float D = BSDF->D(wi);
         // DebugLog("D * half[1]", D * half[1]);
         // DebugLog("h", half);
-        Dcheck += D * std::abs(half[1]);
+        Dcheck += D * std::abs(half[1]) / pdf;
 
         bool nancheck = std::isnan(bsdf[0]) || std::isnan(bsdf[1]) || std::isnan(bsdf[2]);
         bool infcheck = std::isinf(bsdf[0]) || std::isinf(bsdf[1]) || std::isinf(bsdf[2]);
@@ -40,7 +40,7 @@ int main() {
         }
     }
 
-    DebugLog("Dcheck", Dcheck);
+    DebugLog("Dcheck", Dcheck / Sampling);
 
 
     return 0;

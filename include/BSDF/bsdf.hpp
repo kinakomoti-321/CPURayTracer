@@ -20,5 +20,18 @@ namespace BSDFMath {
   inline float tanTheta(const Vec3& w) { return sinTheta(w) / cosTheta(w); }
   inline float tan2Theta(const Vec3& w) { return tanTheta(w) * tanTheta(w); }
 
+  inline float cosPhi(const Vec3& w) {
+    float sintheta = sinTheta(w);
+    if (sintheta == 0) return 1.0f;
+    return std::clamp(w[0] / sintheta, -1.0f, 1.0f);
+  }
+  inline float sinPhi(const Vec3& w) {
+    float sintheta = sinTheta(w);
+    if (sintheta == 0) return 0.0f;
+    return std::clamp(w[2] / sintheta, -1.0f, 1.0f);
+  }
+
+  inline float cosPhi2(const Vec3& w) { return cosPhi(w) * cosPhi(w); }
+  inline float sinPhi2(const Vec3& w) { return sinPhi(w) * sinPhi(w); }
 
 }

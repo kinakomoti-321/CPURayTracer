@@ -28,7 +28,7 @@ private:
 public:
   Lambert(const Vec3& rho) : rho(rho) {};
   Vec3 samplingBSDF(const Vec3& wo, Vec3& wi, float& pdf, const std::shared_ptr<Sampler>& sampler)const override {
-    wi = SphereSampling(sampler->sample(), sampler->sample(), pdf);
+    wi = cosineSampling(sampler->sample(), sampler->sample(), pdf);
     return rho * PI_INV;
   }
   Vec3 evaluateBSDF(const Vec3& wo, const Vec3& wi)const override {
@@ -36,6 +36,6 @@ public:
     return rho * PI_INV;
   }
   float samplePDF(const Vec3& wo, const Vec3& wi)const override {
-    return 0.5f * PI_INV;
+    return std::abs(wi[1]);
   }
 };
