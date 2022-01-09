@@ -123,32 +123,32 @@ main/fast:
 	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
-src/BSDFtest.o: src/BSDFtest.cpp.o
+src/GGX.o: src/GGX.cpp.o
 
-.PHONY : src/BSDFtest.o
+.PHONY : src/GGX.o
 
 # target to build an object file
-src/BSDFtest.cpp.o:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/BSDFtest.cpp.o
-.PHONY : src/BSDFtest.cpp.o
+src/GGX.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GGX.cpp.o
+.PHONY : src/GGX.cpp.o
 
-src/BSDFtest.i: src/BSDFtest.cpp.i
+src/GGX.i: src/GGX.cpp.i
 
-.PHONY : src/BSDFtest.i
+.PHONY : src/GGX.i
 
 # target to preprocess a source file
-src/BSDFtest.cpp.i:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/BSDFtest.cpp.i
-.PHONY : src/BSDFtest.cpp.i
+src/GGX.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GGX.cpp.i
+.PHONY : src/GGX.cpp.i
 
-src/BSDFtest.s: src/BSDFtest.cpp.s
+src/GGX.s: src/GGX.cpp.s
 
-.PHONY : src/BSDFtest.s
+.PHONY : src/GGX.s
 
 # target to generate assembly for a file
-src/BSDFtest.cpp.s:
-	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/BSDFtest.cpp.s
-.PHONY : src/BSDFtest.cpp.s
+src/GGX.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/GGX.cpp.s
+.PHONY : src/GGX.cpp.s
 
 # Help Target
 help:
@@ -159,9 +159,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... main"
-	@echo "... src/BSDFtest.o"
-	@echo "... src/BSDFtest.i"
-	@echo "... src/BSDFtest.s"
+	@echo "... src/GGX.o"
+	@echo "... src/GGX.i"
+	@echo "... src/GGX.s"
 .PHONY : help
 
 

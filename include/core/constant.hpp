@@ -12,9 +12,9 @@ constexpr float PI_INV4 = 1.0f / PI4;
 
 template <class T>
 inline void DebugLog(const std::string& s, const T& a) {
-    std::cout << s << " : " << a << std::endl;
+    // std::cout << s << " : " << a << std::endl;
 }
 
 inline void DebugLog(const std::string& s) {
-    std::cout << s << std::endl;
+    // std::cout << s << std::endl;
 }

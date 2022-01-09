@@ -8,7 +8,8 @@
 int main() {
 
     int Sampling = 1000000;
-    auto BSDF = std::make_shared<GGX_anistropic>(Vec3(0.9), 0.5f, 0.1f);
+    auto BSDF = std::make_shared<GGX_anistropic>(Vec3(0.9), 0.5f, 0.5f);
+    auto test = std::make_shared<GGX>(Vec3(0.9), 0.5f);
     RNGrandom rng(1000);
     float Dcheck = 0.0;
     float pdf;
@@ -18,6 +19,19 @@ int main() {
         Vec3 bsdf = BSDF->evaluateBSDF(wo, wi);
         Vec3 half = wi;
         float D = BSDF->D(wi);
+        float Dtest = test->D(wi);
+        DebugLog("Da", D);
+        DebugLog("D", Dtest);
+        float G = BSDF->G2(wo, wi);
+        float Gtest = test->G2(wo, wi);
+        DebugLog("Ga", G);
+        DebugLog("G", Gtest);
+        float u = rng.sample();
+        float v = rng.sample();
+        Vec3 h_a = BSDF->samplem(u, v);
+        Vec3 h_test = test->samplem(u, v);
+        DebugLog("ha", h_a);
+        DebugLog("h_test", h_test);
         // DebugLog("D * half[1]", D * half[1]);
         // DebugLog("h", half);
         Dcheck += D * std::abs(half[1]) / pdf;
