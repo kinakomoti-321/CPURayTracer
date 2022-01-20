@@ -55,7 +55,7 @@ int main()
     auto mat7 = std::make_shared<GGX>(Vec3(0.9), 0.1f);
     auto mat8 = std::make_shared<GGX>(Vec3(0.9), 0.3f);
     auto mat9 = std::make_shared<GGX>(Vec3(0.9), 0.5f);
-    auto mat10 = std::make_shared<GGX_anistropic>(Vec3(0.9), 0.2f, 0.5f);
+    auto mat10 = std::make_shared<GGX_anistropic>(Vec3(0.9), 0.7f, 0.7f);
 
     auto lit1 = std::make_shared<Light>(Vec3(1.0, 0.9, 0.9), 5.0);
 
@@ -101,7 +101,7 @@ int main()
     const auto camera = std::make_shared<Pinhole>(camPos, camLook, Vec2(2.0), 2.0f);
 
     Renderer renderer(width, height, pt, camera);
-    renderer.render(scene, 500, "GGXanistropic_6", sampler);
+    renderer.render(scene, 100, "GGX_VisibleNormal_compare", sampler);
     // // renderer.render(scene, 100, "GGXsampling_mis_100", sampler);
     // // renderer.render(scene, 200, "GGXsampling_mis_200", sampler);
     // // renderer.render(scene, 300, "GGXsampling_mis_300", sampler);

@@ -74,6 +74,38 @@ public:
     img->writePNG(filename);
   }
 
+  void render_oneTheread(const Scene& scene, int sampling, const std::string& filename, std::shared_ptr<Sampler> sampler) {
+    std::cout << "Render Start" << std::endl;
+    auto start = std::chrono::system_clock::now();
+
+    for (int i = 0; i < width; i++) {
+      for (int j = 0; j < height; j++) {
+        Vec3 sumRadiance(0.0);
+        auto sampler1 = std::make_shared<RNGrandom>(i + width * j);
+        // std::cout << i << " : " << j << ": samplingStart" << std::endl;
+        for (int k = 0; k < sampling; k++) {
+          Vec2 cameraUV;
+          cameraUV[0] = (2.0f * (i + sampler->sample() - 0.5f) - width) / height;
+          cameraUV[1] = (2.0f * (j + sampler->sample() - 0.5f) - height) / height;
+          float cweight;
+          Ray cameraray = camera->getRay(cameraUV, sampler1, cweight);
+          // std::cout << "Integrate Start" << std::endl;
+          sumRadiance += cweight * integrator->integrate(cameraray, scene, sampler1);
+        }
+
+        // std::cout << i << " : " << j << ": sampling End" << std::endl;
+        Vec3 radiance = sumRadiance / static_cast<float>(sampling);
+        img->setPixel(i, j, radiance);
+      }
+    }
+    auto end = std::chrono::system_clock::now();
+    std::cout << "End :"
+      << std::chrono::duration_cast<std::chrono::milliseconds>(end -
+        start).count()
+      << "ms" << std::endl;
+    img->writePNG(filename);
+  }
+
   void timeRender(const Scene& scene, float time, const std::string& filename, std::shared_ptr<Sampler> sampler) {
     std::cout << "Render Start" << std::endl;
     auto start = std::chrono::system_clock::now();

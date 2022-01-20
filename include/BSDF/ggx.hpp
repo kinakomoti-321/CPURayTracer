@@ -345,35 +345,35 @@ public:
     }
 
 
-    Vec3 samplem(float u, float v) const {
-        float tanTerm = std::tan(2.0f * PI * u) * a_y / a_x;
-        float phi = std::atan(tanTerm);
-        if (u >= 0.75) {
-            phi += 2.0f * PI;
+    Vec3 samplem(const Vec3& V_, float u, float v) const {
+        Vec3 V = normalize(Vec3(a_x * V_[0], V_[1], a_y * V_[2]));
+
+        Vec3 n = Vec3(0, 1, 0);
+        if (V[1] > 0.99) n = Vec3(1, 0, 0);
+        Vec3 T1 = normalize(cross(V, n));
+        Vec3 T2 = normalize(cross(T1, V));
+
+        float r = std::sqrt(u);
+        float a = 1.0f / (1.0f + V[1]);
+        float phi;
+        if (a > v) {
+            phi = PI * v / a;
         }
-        else if (u > 0.25) {
-            phi += PI;
+        else {
+            phi = PI * (v - a) / (1.0f - a) + PI;
         }
 
-        DebugLog("phi", phi);
-        DebugLog("phi_a", 2.0f * PI * u);
-        const float cos2phi = std::cos(phi) * std::cos(phi);
-        const float sin2phi = std::sin(phi) * std::sin(phi);
-        const float term_alpha = cos2phi / (a_x * a_x) + sin2phi / (a_y * a_y);
-        DebugLog("x", a_x);
-        DebugLog("y", a_y);
+        float P1 = r * std::cos(phi);
+        float P2 = r * std::sin(phi);
+        if (a < v) P2 *= V[1];
 
-        DebugLog("alpha", term_alpha);
-        DebugLog("cos2", cos2phi);
-        DebugLog("sin2", sin2phi);
-        // const float term = term_alpha * (1.0f - v) / v;
-        const float term = v / ((1.0f - v) * term_alpha);
-        const float theta = std::atan(std::sqrt(term));
-        DebugLog("theta", theta);
+        Vec3 N = P1 * T1 + P2 * T2 + std::sqrt(std::max(1.0f - P1 * P1 - P2 * P2, 0.0f)) * V;
 
-        return Vec3(std::cos(phi) * std::sin(theta), std::cos(theta),
-            std::sin(phi) * std::sin(theta));
+        N = normalize(Vec3(a_x * N[0], N[1], a_y * N[2]));
+
+        return N;
     }
+
     Vec3 samplingBSDF(const Vec3& wo, Vec3& wi, float& pdf,
         const std::shared_ptr<Sampler>& sampler) const override {
         // wi = SphereSampling(sampler->sample(), sampler->sample(), pdf);
@@ -385,15 +385,14 @@ public:
 
         Vec3 i = wo;
         Vec3 n = Vec3(0.0, 1.0, 0.0);
-        Vec3 m = this->samplem(sampler->sample(), sampler->sample());
+        Vec3 m = this->samplem(i, sampler->sample(), sampler->sample());
         // Vec3 m = SphereSampling(sampler->sample(), sampler->sample(), pdf);
         Vec3 o = reflect(wo, m);
         wi = o;
         if (wi[1] < 0.0f) return Vec3(0.0);
 
         // DebugLog("o", o);
-        // DebugLog("m", m);
-
+        // std::cout << m << std::endl;
         float im = absdot(i, m);
         float in = absdot(i, n);
         float on = absdot(o, n);
@@ -404,8 +403,9 @@ public:
 
         Vec3 brdf = F * G_ * D_ / (4.0f * in * on);
 
-        pdf = D_ * BSDFMath::cosTheta(m) / (4.0f * absdot(m, o));
+        pdf = D_ / (4.0f * absdot(m, o));
 
+        pdf *= this->G1(i) * im / absdot(i, n);
         // if (brdf[1] < 0.01f) {
         //     DebugLog("F", F);
         //     DebugLog("G", G_);

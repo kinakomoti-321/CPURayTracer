@@ -37,9 +37,7 @@ public:
         // wo: 入射方向,wi:反射方向
       Vec3 t, b;
       tangentSpaceBasis(info.normal, t, b);
-      // DebugLog("Normal", info.normal);
-      DebugLog("Position", info.position);
-      // if (dot(info.normal, next_ray.direction) > 0.0) DebugLog("plus");
+      // DebugLog("Position", info.position);
       Vec3 wo = worldtoLocal(-next_ray.direction, t, info.normal, b);
       // DebugLog("wo", wo);
       Vec3 wi;
@@ -48,18 +46,13 @@ public:
 
       // BSDF計算
       bsdf = info.object->sampleBSDF(wo, wi, pdf, sample);
-      // if (wi[1] < 0.0) DebugLog("inside");
 
-      // DebugLog("wi", wi);
       const Vec3 next_direction = localToWorld(wi, t, info.normal, b);
-      // DebugLog("nextDir", next_direction);
       const float cosine = std::abs(dot(info.normal, next_direction));
       throughput *= bsdf * cosine / pdf;
-      // DebugLog("cosine", cosine);
-      // DebugLog("through", bsdf * cosine / pdf);
       next_ray = Ray(info.position + 0.01f * next_direction, next_direction);
-      DebugLog("rayOrigin", next_ray.origin);
-      DebugLog("rayDirection", next_ray.direction);
+      // DebugLog("rayOrigin", next_ray.origin);
+      // DebugLog("rayDirection", next_ray.direction);
 
       // std::cout << "Pathtrace_check" << std::endl;
     }
